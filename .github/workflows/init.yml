@@ -8,6 +8,9 @@ on:
 jobs:
   init:
     runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        java: [ 16, 16.0.1 ]
     steps:
       - name: Install packages
         run: sudo apt install unzip axel
@@ -15,7 +18,7 @@ jobs:
       - name: Setup java
         uses: actions/setup-java@v2
         with:
-          java-version: 16
+          java-version: ${{ matrix.java }}
           distribution: adopt
           architecture: x64
       - name: Setup JavaFX
